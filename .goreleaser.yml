@@ -11,27 +11,50 @@ builds:
   goos:
     - darwin
     - linux
+    - openbsd
     - windows
+  goarch:
+    - 386
+    - amd64
+    - arm
+    - arm64
+  ignore:
+    - goos: darwin
+      goarch: 386
 - id: "cap2rom"
   main: ./cmd/cap2rom/main.go
   binary: cap2rom
   goos:
     - darwin
     - linux
+    - openbsd
     - windows
+  goarch:
+    - 386
+    - amd64
+    - arm
+    - arm64
+  ignore:
+    - goos: darwin
+      goarch: 386
 archives:
-- replacements:
-    darwin: MacOS
-    linux: Linux
-    windows: Windows
-    386: 32bit
-    amd64: 64bit
+- format: zip
+  replacements:
+    darwin: macOS
+    386: x86
+    amd64: x64
+brews:
+  - github:
+      owner: jfoster
+      name: homebrew-tap
+    folder: Formula
+    homepage:  https://github.com/jfoster/bintools
+    description: A collection of cli utilities for manipulating binary files
 checksum:
   name_template: "checksums.txt"
 snapshot:
   name_template: "{{ .Tag }}-next"
 changelog:
-  sort: asc
   filters:
     exclude:
       - "^docs:"
