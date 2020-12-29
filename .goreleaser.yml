@@ -38,18 +38,55 @@ builds:
     - goos: darwin
       goarch: 386
 archives:
-- format: zip
+- id: bytepad
+  builds:
+    - bytepad
+  format: zip
+  name_template: "{{ .Binary }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}{{ if .Arm }}v{{ .Arm }}{{ end }}{{ if .Mips }}_{{ .Mips }}{{ end }}"
   replacements:
     darwin: macOS
     386: x86
     amd64: x64
+  allow_different_binary_count: true
+- id: cap2rom
+  builds:
+    - cap2rom
+  format: zip
+  name_template: "{{ .Binary }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}{{ if .Arm }}v{{ .Arm }}{{ end }}{{ if .Mips }}_{{ .Mips }}{{ end }}"
+  replacements:
+    darwin: macOS
+    386: x86
+    amd64: x64
+  allow_different_binary_count: true
 brews:
-  - tap:
+  - name: bytepad
+    ids:
+    - bytepad
+    tap:
       owner: jfoster
       name: homebrew-tap
     folder: Formula
     homepage:  https://github.com/jfoster/binary-utilities
-    description: A collection of cli utilities for manipulating binary files
+    description: "Add padding data to a binary file"
+    license: "MIT"
+    test: |
+      system "true"
+    install: |
+      bin.install "bytepad"
+  - name: cap2rom
+    ids:
+    - cap2rom
+    tap:
+      owner: jfoster
+      name: homebrew-tap
+    folder: Formula
+    homepage:  https://github.com/jfoster/binary-utilities
+    description: "Strip the header from an ASUS .CAP file"
+    license: "MIT"
+    test: |
+      system "true"
+    install: |
+      bin.install "cap2rom"
 checksum:
   name_template: "checksums.txt"
 snapshot:
