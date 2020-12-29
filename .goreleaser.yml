@@ -44,7 +44,7 @@ archives:
     386: x86
     amd64: x64
 brews:
-  - github:
+  - tap:
       owner: jfoster
       name: homebrew-tap
     folder: Formula
