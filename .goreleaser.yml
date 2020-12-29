@@ -48,7 +48,7 @@ brews:
       owner: jfoster
       name: homebrew-tap
     folder: Formula
-    homepage:  https://github.com/jfoster/bintools
+    homepage:  https://github.com/jfoster/binary-utilities
     description: A collection of cli utilities for manipulating binary files
 checksum:
   name_template: "checksums.txt"

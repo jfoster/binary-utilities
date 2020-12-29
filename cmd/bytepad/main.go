@@ -6,7 +6,7 @@ import (
 	"log"
 	"os"
 
-	"github.com/jfoster/bintools"
+	utils "github.com/jfoster/binary-utilities"
 )
 
 func main() {
@@ -39,7 +39,7 @@ func main() {
 		log.Fatal(errors.New("diff cannot be negative"))
 	}
 
-	pad := bintools.Bytes(byte(*data), diff)
+	pad := utils.Bytes(byte(*data), diff)
 
 	n, err := file.Write(pad)
 	if err != nil {

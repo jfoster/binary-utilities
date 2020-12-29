@@ -9,7 +9,7 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/jfoster/bintools"
+	utils "github.com/jfoster/binary-utilities"
 )
 
 func main() {
@@ -33,7 +33,7 @@ func main() {
 		log.Fatal(err)
 	}
 
-	ret, err := capfile.Seek(-bintools.PrevPowerOfTwo(stat.Size()), 2)
+	ret, err := capfile.Seek(utils.PrevPowerOfTwo(stat.Size()), 2)
 	if err != nil {
 		log.Fatal(err)
 	}

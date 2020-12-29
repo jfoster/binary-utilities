@@ -1,4 +1,4 @@
-package bintools
+package utils
 
 func NextPowerOfTwo(v int64) int64 {
 	v--

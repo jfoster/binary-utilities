@@ -1,8 +1,8 @@
-bintools
+binary-utilities
 ===
 A collection of cli utilities for manipulating binary files.
 
-[Releases (precompiled binaries)](https://github.com/jfoster/bintools/releases)
+[Releases (precompiled binaries)](https://github.com/jfoster/binary-utilities/releases)
 
 ## bytepad
 
