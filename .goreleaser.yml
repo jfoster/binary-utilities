@@ -1,9 +1,11 @@
 env:
   - GO111MODULE=on
   - CGO_ENABLED=0
+
 before:
   hooks:
     - go mod tidy
+
 builds:
 - id: "bytepad"
   main: ./cmd/bytepad/main.go
@@ -21,6 +23,7 @@ builds:
   ignore:
     - goos: darwin
       goarch: 386
+
 - id: "cap2rom"
   main: ./cmd/cap2rom/main.go
   binary: cap2rom
@@ -37,7 +40,20 @@ builds:
   ignore:
     - goos: darwin
       goarch: 386
+
 archives:
+- id: binary-utilities
+  builds:
+    - bytepad
+    - cap2rom
+  format: zip
+  name_template: "{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}{{ if .Arm }}v{{ .Arm }}{{ end }}{{ if .Mips }}_{{ .Mips }}{{ end }}"
+  replacements:
+    darwin: macOS
+    386: x86
+    amd64: x64
+  allow_different_binary_count: true
+
 - id: bytepad
   builds:
     - bytepad
@@ -48,6 +64,7 @@ archives:
     386: x86
     amd64: x64
   allow_different_binary_count: true
+
 - id: cap2rom
   builds:
     - cap2rom
@@ -58,35 +75,12 @@ archives:
     386: x86
     amd64: x64
   allow_different_binary_count: true
-brews:
-  - name: bytepad
-    ids:
-    - bytepad
-    tap:
-      owner: jfoster
-      name: homebrew-tap
-    folder: Formula
-    homepage:  https://github.com/jfoster/binary-utilities
-    test: |
-      system "true"
-    install: |
-      bin.install "./cmd/bytepad"
-  - name: cap2rom
-    ids:
-    - cap2rom
-    tap:
-      owner: jfoster
-      name: homebrew-tap
-    folder: Formula
-    homepage:  https://github.com/jfoster/binary-utilities
-    test: |
-      system "true"
-    install: |
-      bin.install "./cmd/cap2rom"
 checksum:
   name_template: "checksums.txt"
+
 snapshot:
   name_template: "{{ .Tag }}-next"
+
 changelog:
   filters:
     exclude:
